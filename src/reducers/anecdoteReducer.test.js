@@ -10,7 +10,7 @@ describe('anecdote reducer', () => {
 		deepFreeze(anecdote);
 
 		const action = {
-			type: 'VOTE',
+			type: 'VOTE_ANECDOTE',
 			data: { id: anecdote.id },
 		};
 
