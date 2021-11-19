@@ -13,15 +13,4 @@ describe('notication reducer', () => {
 		const newState = notificationReducer(state, action);
 		expect(newState).toBe(message);
 	});
-
-	test('should reset notification property of the state', () => {
-		const state = 'test notification';
-
-		const action = {
-			type: 'RESET_NOTIFICATION',
-		};
-
-		const newState = notificationReducer(state, action);
-		expect(newState).toBe('');
-	});
 });
