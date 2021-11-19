@@ -1,10 +1,11 @@
-import getId from '../lib/getId';
-import anecdoteReducer, { initialState } from './anecdoteReducer';
+import anecdoteReducer from './anecdoteReducer';
 import deepFreeze from 'deep-freeze';
 
 describe('anecdote reducer', () => {
 	test('should increment vote of an anecdote', () => {
-		const state = initialState;
+		const state = [
+			{ content: 'If it hurts, do it more often', id: 1, votes: 0 },
+		];
 		const anecdote = state[0];
 		deepFreeze(state);
 		deepFreeze(anecdote);
@@ -27,12 +28,14 @@ describe('anecdote reducer', () => {
 	});
 
 	test('should create a new anecdote', () => {
-		const state = initialState;
+		const state = [
+			{ content: 'If it hurts, do it more often', id: 1, votes: 0 },
+		];
 		const anecdote = state[0];
 		deepFreeze(state);
 		deepFreeze(anecdote);
 
-		const data = { content: 'test', id: getId(), votes: 0 };
+		const data = { content: 'test', id: state.length + 1, votes: 0 };
 		const action = {
 			type: 'NEW_ANECDOTE',
 			data,
