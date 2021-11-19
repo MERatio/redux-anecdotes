@@ -2,7 +2,7 @@ import anecdoteReducer from './anecdoteReducer';
 import deepFreeze from 'deep-freeze';
 
 describe('anecdote reducer', () => {
-	test('should increment vote of an anecdote', () => {
+	test('should update an anecdote', () => {
 		const state = [
 			{ content: 'If it hurts, do it more often', id: 1, votes: 0 },
 		];
@@ -10,21 +10,21 @@ describe('anecdote reducer', () => {
 		deepFreeze(state);
 		deepFreeze(anecdote);
 
+		const newAnecdoteObj = {
+			content: 'updated anecdote',
+			id: anecdote.id,
+			votes: anecdote.votes + 1,
+		};
+
 		const action = {
-			type: 'VOTE_ANECDOTE',
-			data: { id: anecdote.id },
+			type: 'UPDATE_ANECDOTE',
+			id: anecdote.id,
+			data: newAnecdoteObj,
 		};
 
 		const newState = anecdoteReducer(state, action);
-		const newAnecdote = newState.find((el) => el.id === action.data.id);
-		expect(newAnecdote.votes).toBe(anecdote.votes + 1);
-		expect(newState).toEqual(
-			state.map((el) =>
-				el.id !== action.data.id
-					? el
-					: { ...anecdote, votes: anecdote.votes + 1 }
-			)
-		);
+		const newAnecdote = newState.find((el) => el.id === action.id);
+		expect(newAnecdote).toBe(newAnecdoteObj);
 	});
 
 	test('should create a new anecdote', () => {
