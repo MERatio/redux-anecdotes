@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { setFilter } from '../reducers/filterReducer';
 
-const Filter = () => {
-  const dispatch = useDispatch();
-  const filter = useSelector((state) => state.filter);
-
+const Filter = ({ setFilter }) => {
   const handleFilterChange = (e) => {
-    dispatch(setFilter(e.target.value));
+    setFilter(e.target.value);
   };
 
   const style = {
@@ -21,4 +18,8 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+const mapDispatchToProps = {
+  setFilter,
+};
+
+export default connect(null, mapDispatchToProps)(Filter);
